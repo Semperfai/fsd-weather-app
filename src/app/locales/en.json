@@ -1,0 +1,12 @@
+{
+  "main": "Main",
+  "weather": "Weather",
+  "favorites": "Favorites",
+  "cities": "Cities",
+  "addCity": "Add City",
+  "day": "Day",
+  "week": "Week",
+  "addToFavorites": "Add to Favorites",
+  "removeCity": "Remove City",
+  "removeFavoriteCity": "Remove Favorite City"
+}

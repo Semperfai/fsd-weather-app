@@ -1,0 +1,12 @@
+{
+  "main": "Головна",
+  "weather": "Погода",
+  "favorites": "Обране",
+  "cities": "Міста",
+  "addCity": "Додати місто",
+  "day": "День",
+  "week": "Тиждень",
+  "addToFavorites": "В обране",
+  "removeCity": "Видалити місто",
+  "removeFavoriteCity": "Видалити місто з обраних"
+}
