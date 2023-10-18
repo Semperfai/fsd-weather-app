@@ -2,45 +2,47 @@
 import Highlights from "@/components/Highlights/Highlights.vue";
 import CityCardMenu from "./CityCardMenu/CityCardMenu.vue";
 import ChartTemp from "@/components//ChartTemp/ChartTemp.vue";
-import { useRoute } from 'vue-router';
+import { useRoute } from "vue-router";
 import { useWeatherStoreForCities } from "@/stores/weather-cities/weather-cities.store";
 
 const weatherCitiesStore = useWeatherStoreForCities();
 const route = useRoute();
-import { ref , computed } from "vue";
+import { ref, computed } from "vue";
 const emits = defineEmits<{
   (e: "update:mode", id: number): void;
 }>();
 
-
-
 const currentCity = computed(() => {
   const id = Number(route.params.id);
-  const source = route.path.includes("/favorites") ? weatherCitiesStore.favoriteCities : weatherCitiesStore.cities;
-  return source.find(city => city.id === id) || null; 
+  const source = route.path.includes("/favorites")
+    ? weatherCitiesStore.favoriteCities
+    : weatherCitiesStore.cities;
+  return source.find((city) => city.id === id) || null;
 });
 
 const weatherInfoMode = ref<"default" | "forecast5">("default");
 
-
 const computedCityHighlights = computed(() => {
-  const data = weatherInfoMode.value === "forecast5"
-    ? currentCity.value?.forecastWeatherData
-    : [currentCity.value?.currentWeatherData];
-  
-  return data?.filter(item => item != null) || [];
+  const data =
+    weatherInfoMode.value === "forecast5"
+      ? currentCity.value?.forecastWeatherData
+      : [currentCity.value?.currentWeatherData];
+
+  return data?.filter((item) => item != null) || [];
 });
+
 const computedChartHighlights = computed(() => {
   if (!currentCity.value || !currentCity.value.chartData) return null;
   return weatherInfoMode.value === "forecast5"
-        ? currentCity.value?.chartData.chartForecast5Data
-        : currentCity.value?.chartData.chartCurrentForecastData;
+    ? currentCity.value?.chartData.chartForecast5Data
+    : currentCity.value?.chartData.chartCurrentForecastData;
 });
 
-
-const isFavoriteCity = (cityId: number) => {
-  return weatherCitiesStore.favoriteCities.some(city => city.id === cityId);
-};
+const isFavoriteCity = computed(() => {
+  return weatherCitiesStore.favoriteCities.some((city) => {
+    return city.id === Number(route.params.id);
+  });
+});
 const menuItems = [
   { id: 0, label: "День" },
   { id: 1, label: "Тиждень" },
@@ -54,7 +56,11 @@ const changeMode = (id: number) => {
 };
 </script>
 <template>
-  <div class="card" :class="{  'favorite-city': isFavoriteCity(route.params.id) }" v-if="currentCity && computedCityHighlights">
+  <div
+    class="card"
+    :class="{ 'favorite-city': isFavoriteCity }"
+    v-if="currentCity && computedCityHighlights"
+  >
     <CityCardMenu
       :active-item="activeItem"
       @on-item-change="changeMode"
@@ -65,14 +71,16 @@ const changeMode = (id: number) => {
       :key="item ? item.id : undefined"
       :weather-data="item"
     />
-    <ChartTemp v-if="computedChartHighlights" :chart-mode="weatherInfoMode" :chart-data="computedChartHighlights"/>
+    <ChartTemp
+      v-if="computedChartHighlights"
+      :chart-mode="weatherInfoMode"
+      :chart-data="computedChartHighlights"
+    />
   </div>
   <div v-else-if="currentCity && !computedCityHighlights">
-  Loading weather data...
-</div>
-<div v-else>
-  Please, add city to list to see weather info for it 🌤
-</div>
+    Loading weather data...
+  </div>
+  <div v-else>Please, add city to list to see weather info for it 🌤</div>
 </template>
 
 <style scoped>
@@ -88,6 +96,6 @@ const changeMode = (id: number) => {
 }
 
 .favorite-city {
-  border-color: gold; 
+  border: 1px solid gold;
 }
 </style>
