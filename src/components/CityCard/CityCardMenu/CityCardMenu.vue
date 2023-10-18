@@ -2,6 +2,7 @@
 import { useRoute, useRouter } from "vue-router";
 import { useWeatherStoreForCities } from "@/stores/weather-cities/weather-cities.store";
 import { IconStar, BaseButton } from "@/shared/ui";
+import { computed } from "vue";
 const weatherCitiesStore = useWeatherStoreForCities();
 
 const route = useRoute();
@@ -15,6 +16,10 @@ const emits = defineEmits<{
   (e: "on-item-change", id: number): void;
 }>();
 
+const isFavoriteRoute = computed(() => {
+  return route.fullPath.includes("/favorites");
+});
+
 const addToFavorites = () => {
   const id = Number(route.params.id);
   const city = weatherCitiesStore.cities.find((city) => city.id === id);
@@ -25,7 +30,7 @@ const addToFavorites = () => {
     weatherCitiesStore.favoriteCities.push(city);
     localStorage.setItem(
       "favoriteCities",
-      JSON.stringify(weatherCitiesStore.favoriteCities),
+      JSON.stringify(weatherCitiesStore.favoriteCities)
     );
   }
 };
@@ -68,6 +73,7 @@ const deleteCurrentCity = () => {
       text="В обране"
     />
     <BaseButton
+      v-if="!isFavoriteRoute"
       :method="deleteCurrentCity"
       variant="primary"
       text="Видалити місто"
