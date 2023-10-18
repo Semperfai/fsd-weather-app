@@ -144,29 +144,6 @@ const addCityCard = () => {
   flex-direction: column;
 }
 
-.city-inner {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-}
-
-.city-inner::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 10px;
-  width: 25px;
-  height: 25px;
-  background: url("@/assets/img/search.svg") no-repeat 50% 50%;
-  background-size: contain;
-  transform: translateY(50%);
-  cursor: pointer;
-}
-
-
-.city-list {
-  width: 100%;
-}
 
 .title {
   font-size: 2rem;
