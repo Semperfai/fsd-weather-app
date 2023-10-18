@@ -41,7 +41,7 @@ watch(
   () => route.path,
   () => {
     redirectToFirstCity();
-  },
+  }
 );
 
 watch(
@@ -49,7 +49,7 @@ watch(
   () => {
     redirectToFirstCity();
   },
-  { deep: true },
+  { deep: true }
 );
 
 const updatedSearchData = async (city: string) => {
@@ -71,7 +71,7 @@ const updatedSearchData = async (city: string) => {
     }
 
     const existingCityIndex = weatherCitiesStore.cities.findIndex(
-      (city) => city.id === responseWeather?.id,
+      (city) => city.id === responseWeather?.id
     );
     if (existingCityIndex !== -1) {
       popupMessage.value = "Місто вже додано";

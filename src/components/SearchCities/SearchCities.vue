@@ -33,7 +33,7 @@ const getSearchResults = () => {
       }
     }
     mapBoxSearchResult.value = null;
-  }, 300);
+  }, 200);
 };
 
 const selectCity = (data: any) => {
