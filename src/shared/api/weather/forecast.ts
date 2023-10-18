@@ -27,21 +27,23 @@ export const getForecastByCity = (
 
 export const getUserForecast = async () => {
   try {
-    const response = await axios.get("https://httpbin.org/ip");
-    const userIP = response.data.origin.split(",")[0].trim();
-    const locationResponse = await axios.get(
-      `http://ip-api.com/json/${userIP}`,
-    );
-    const locationData = locationResponse.data;
-    const city = locationData.city;
-    const country = locationData.country;
+    
+    const response = await axios.get("https://ipinfo.io?token=d919b62edd0c89");
+
+    const locationData = response.data;
+    
+    
+    const { city, country } = locationData;
 
     const weatherData = await getForecastByCity({
       q: `${city},${country}`,
       units: "metric",
     });
+
     return weatherData;
+
   } catch (error) {
     console.error(error);
   }
+
 };
