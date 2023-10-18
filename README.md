@@ -2,6 +2,42 @@
 
 This template should help get you started developing with Vue 3 in Vite.
 
+# API Keys
+
+This project requires API keys to access two third-party services: OpenWeatherMap and Mapbox. These keys are essential for specific functionalities within the application. Below are instructions on how to obtain and use these keys.
+
+## OpenWeatherMap API Key (VITE_API_KEY)
+
+The OpenWeatherMap API key is used for retrieving weather information. To use this key, follow these steps:
+
+1. Sign up on the [OpenWeatherMap website](https://openweathermap.org/).
+
+2. Obtain your API key.
+
+3. Set it in the `VITE_API_KEY` variable in your project's `.env` file.
+
+   Example .env file:
+
+   ```plaintext
+   VITE_API_KEY=YOUR_OPENWEATHERMAP_API_KEY
+
+## Mapbox API Key (VITE_API_MAP_KEY)
+
+The Mapbox API key is used for geocoding and map display. To use this key, follow these steps:
+
+1. Sign up on the [Mapbox website](https://www.mapbox.com/).
+
+2. Obtain your API key.
+
+3. Set it in the `VITE_API_MAP_KEY` variable in your project's `.env` file.
+
+   Example `.env` file:
+
+   ```plaintext
+   VITE_API_MAP_KEY=YOUR_MAPBOX_API_KEY
+
+
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
