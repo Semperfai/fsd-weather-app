@@ -67,6 +67,7 @@ const deleteCurrentCity = () => {
       {{ $t(`${item.label}`) }}
     </li>
     <BaseButton
+      v-if="!isFavoriteRoute"
       :method="addToFavorites"
       :icon="IconStar"
       variant="primary"
@@ -86,7 +87,7 @@ const deleteCurrentCity = () => {
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 0.5rem;
   font-size: 1.2rem;
   margin-bottom: 1rem;
