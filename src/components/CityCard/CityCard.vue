@@ -2,6 +2,7 @@
 import Highlights from "@/components/Highlights/Highlights.vue";
 import CityCardMenu from "./CityCardMenu/CityCardMenu.vue";
 import ChartTemp from "@/components//ChartTemp/ChartTemp.vue";
+import { type WeatherMode } from "@/shared/types";
 import { useRoute } from "vue-router";
 import { useWeatherStoreForCities } from "@/stores/weather-cities/weather-cities.store";
 
@@ -20,7 +21,7 @@ const currentCity = computed(() => {
   return source.find((city) => city.id === id) || null;
 });
 
-const weatherInfoMode = ref<"default" | "forecast5">("default");
+const weatherInfoMode = ref<WeatherMode>("default");
 
 const computedCityHighlights = computed(() => {
   const data =
