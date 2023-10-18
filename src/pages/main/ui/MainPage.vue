@@ -64,8 +64,19 @@ const updatedSearchData = async (city: string) => {
       popupMessage.value =
         "Помилка при отриманні даних погоди, спробуйте інший запит";
     }
+    
+    const existingCityIndex = weatherCitiesStore.cities.findIndex(city => city.id === responseWeather?.id)
+    if (existingCityIndex !== -1) {
+      popupMessage.value = "Місто вже додано";
+      return;
+    }
+    const currentCityId = Number(router.currentRoute.value.params.id);
+
+
     weatherCitiesStore.cities.forEach((city, index) => {
-      if (city.id === responseWeather?.id || city.id === temporaryId) {
+      
+      if (city.id === responseWeather?.id || city.id === temporaryId || city.id === currentCityId) {
+        
         weatherCitiesStore.cities[index] = {
           id: responseWeather?.id,
           name: responseWeather?.name,
@@ -144,15 +155,13 @@ const addCityCard = () => {
   flex-direction: column;
 }
 
-
-.title {
-  font-size: 2rem;
+.city-inner {
+  position: relative;
+  display: inline-block;
+  width: 100%;
 }
 
-.pagination {
-  display: flex;
-  gap: 0.5rem;
-}
+
 
 .item {
   padding: 4px 6px;
