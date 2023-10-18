@@ -27,12 +27,10 @@ export const getForecastByCity = (
 
 export const getUserForecast = async () => {
   try {
-    
     const response = await axios.get("https://ipinfo.io?token=d919b62edd0c89");
 
     const locationData = response.data;
-    
-    
+
     const { city, country } = locationData;
 
     const weatherData = await getForecastByCity({
@@ -41,9 +39,7 @@ export const getUserForecast = async () => {
     });
 
     return weatherData;
-
   } catch (error) {
     console.error(error);
   }
-
 };

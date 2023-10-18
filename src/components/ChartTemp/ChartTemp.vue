@@ -3,11 +3,11 @@ import Chart from "chart.js/auto";
 import { ref, shallowRef, watch, nextTick, toRefs } from "vue";
 
 const props = defineProps<{
- chartData: any
- chartMode: any
+  chartData: any;
+  chartMode: any;
 }>();
- 
-const { chartData , chartMode} = toRefs(props);
+
+const { chartData, chartMode } = toRefs(props);
 
 const chartEl = ref<HTMLElement | null>(null);
 const dataChart = shallowRef(null);
@@ -19,15 +19,15 @@ watch(
     if (dataChart.value) {
       if (chartMode.value === "forecast5") {
         dataChart.value.data.labels = tmpData.map((item) =>
-          new Date(item.date * 1000).toLocaleDateString()
+          new Date(item.date * 1000).toLocaleDateString(),
         );
         dataChart.value.data.datasets[0].data = tmpData.map(
-          (item) => item.avgTemp
+          (item) => item.avgTemp,
         );
       } else {
         dataChart.value.data.labels = tmpData.map((item) => item.time);
         dataChart.value.data.datasets[0].data = tmpData.map(
-          (item) => item.temp
+          (item) => item.temp,
         );
       }
 
@@ -39,14 +39,14 @@ watch(
         type: "line",
         data: {
           labels:
-          chartMode.value === "forecast5"
+            chartMode.value === "forecast5"
               ? tmpData.map((item) => new Date(item.date).toLocaleDateString())
               : tmpData.map((item) => item.time),
           datasets: [
             {
               label: "Temperature",
               data:
-              chartMode.value === "forecast5"
+                chartMode.value === "forecast5"
                   ? tmpData.map((item) => item.avgTemp)
                   : tmpData.map((item) => item.temp),
               backgroundColor: "rgba(255, 105, 180, 0.2)",
@@ -63,7 +63,7 @@ watch(
       });
     });
   },
-  { deep: true, immediate: true }
+  { deep: true, immediate: true },
 );
 </script>
 <template>

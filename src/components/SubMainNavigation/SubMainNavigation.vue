@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
+import { useRoute } from "vue-router";
 import { useWeatherStoreForCities } from "@/stores/weather-cities/weather-cities.store";
 
 const route = useRoute();
@@ -13,11 +13,13 @@ const isActiveCity = (cityId: number) => {
 <template>
   <ul class="city-list">
     <li
-      v-for="city,index in weatherCitiesStore.cities"
+      v-for="(city, index) in weatherCitiesStore.cities"
       :key="city.id"
       :class="{ 'active-city': isActiveCity(city.id) }"
     >
-      <router-link class="city-link"  :to="`/city/${city.id}`">{{ index + 1 }}</router-link>
+      <router-link class="city-link" :to="`/city/${city.id}`">{{
+        index + 1
+      }}</router-link>
     </li>
   </ul>
 </template>

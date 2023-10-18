@@ -18,7 +18,9 @@ defineEmits(["click"]);
       :class="['base-icon', 'base-icon--' + variant]"
       :is="icon"
     ></component>
-    <span class="base-text" :class="'base-text--' + variant">{{ $t(`${text}`) }}</span>
+    <span class="base-text" :class="'base-text--' + variant">{{
+      $t(`${text}`)
+    }}</span>
   </router-link>
   <button
     v-else
@@ -31,7 +33,9 @@ defineEmits(["click"]);
       :class="['base-icon', 'base-icon--' + variant]"
       :is="icon"
     ></component>
-    <span class="base-text" :class="'base-text--' + variant">{{  $t(`${text}`) }}</span>
+    <span class="base-text" :class="'base-text--' + variant">{{
+      $t(`${text}`)
+    }}</span>
   </button>
 </template>
 

@@ -9,9 +9,9 @@ export const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: "city/:id",
-        component: () => import("@/components/CityCard/CityCard.vue")
-      }
-    ]
+        component: () => import("@/components/CityCard/CityCard.vue"),
+      },
+    ],
   },
   {
     path: "/favorites",
@@ -20,8 +20,8 @@ export const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: "city/:id",
-        component: () => import("@/components/CityCard/CityCard.vue")
-      }
-    ]
+        component: () => import("@/components/CityCard/CityCard.vue"),
+      },
+    ],
   },
 ];

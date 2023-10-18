@@ -1,14 +1,14 @@
 import { createApp } from "vue";
-import { createI18n } from 'vue-i18n';
-import en from './locales/en.json';
-import uk from './locales/uk.json';
+import { createI18n } from "vue-i18n";
+import en from "./locales/en.json";
+import uk from "./locales/uk.json";
 
 const i18n = createI18n({
-  locale: 'uk',
+  locale: "uk",
   messages: {
     en,
-    uk
-  }
+    uk,
+  },
 });
 
 import { router, pinia } from "./providers";

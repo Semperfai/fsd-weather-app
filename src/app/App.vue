@@ -9,7 +9,7 @@ const weatherCitiesStore = useWeatherStoreForCities();
 
 onBeforeMount(async () => {
   await weatherCitiesStore.getCurrentCityInfo();
-  const storedFavorites = localStorage.getItem('favoriteCities');
+  const storedFavorites = localStorage.getItem("favoriteCities");
   if (storedFavorites) {
     weatherCitiesStore.favoriteCities = JSON.parse(storedFavorites);
   }

@@ -9,14 +9,13 @@ import {
   BasePopup,
 } from "@/shared/ui";
 import SearchCities from "@/components/SearchCities/SearchCities.vue";
-import SubMainNavigation from '@/components/SubMainNavigation/SubMainNavigation.vue';
+import SubMainNavigation from "@/components/SubMainNavigation/SubMainNavigation.vue";
 import {
   mapWeatherData,
   mapForecastData,
   mapChartData,
 } from "@/shared/lib/helpers";
 import { useRoute, useRouter } from "vue-router";
-
 
 const popupMessage = ref<string>("");
 const weatherCitiesStore = useWeatherStoreForCities();
@@ -28,24 +27,30 @@ const closeModal = () => {
 const router = useRouter();
 const route = useRoute();
 
-  const redirectToFirstCity = () => {
-    if (!route.params.id && weatherCitiesStore.cities.length > 0) {
-      router.push(`/city/${weatherCitiesStore.cities[0].id}`);
-    }
+const redirectToFirstCity = () => {
+  if (!route.params.id && weatherCitiesStore.cities.length > 0) {
+    router.push(`/city/${weatherCitiesStore.cities[0].id}`);
   }
+};
 
-  onBeforeMount(() => {
+onBeforeMount(() => {
+  redirectToFirstCity();
+});
+
+watch(
+  () => route.path,
+  () => {
     redirectToFirstCity();
-  });
+  },
+);
 
-  watch(() => route.path, () => {
+watch(
+  () => weatherCitiesStore.cities,
+  () => {
     redirectToFirstCity();
-  });
-
-  watch(() => weatherCitiesStore.cities, () => {
-    redirectToFirstCity();
-  }, { deep: true });
-
+  },
+  { deep: true },
+);
 
 const updatedSearchData = async (city: string) => {
   try {
@@ -64,19 +69,22 @@ const updatedSearchData = async (city: string) => {
       popupMessage.value =
         "Помилка при отриманні даних погоди, спробуйте інший запит";
     }
-    
-    const existingCityIndex = weatherCitiesStore.cities.findIndex(city => city.id === responseWeather?.id)
+
+    const existingCityIndex = weatherCitiesStore.cities.findIndex(
+      (city) => city.id === responseWeather?.id,
+    );
     if (existingCityIndex !== -1) {
       popupMessage.value = "Місто вже додано";
       return;
     }
     const currentCityId = Number(router.currentRoute.value.params.id);
 
-
     weatherCitiesStore.cities.forEach((city, index) => {
-      
-      if (city.id === responseWeather?.id || city.id === temporaryId || city.id === currentCityId) {
-        
+      if (
+        city.id === responseWeather?.id ||
+        city.id === temporaryId ||
+        city.id === currentCityId
+      ) {
         weatherCitiesStore.cities[index] = {
           id: responseWeather?.id,
           name: responseWeather?.name,
@@ -102,20 +110,20 @@ const generateTemporaryId = () => {
 
 const addCityCard = () => {
   if (weatherCitiesStore.cities.length >= 5) {
-    popupMessage.value = "Досягнуто максимальну кількість міст (5). Видаліть одне місто перед додаванням нового.";
+    popupMessage.value =
+      "Досягнуто максимальну кількість міст (5). Видаліть одне місто перед додаванням нового.";
     return;
   }
   const newCity = {
     chartData: null,
     currentWeatherData: null,
     forecastWeatherData: null,
-    id: generateTemporaryId(), 
+    id: generateTemporaryId(),
     name: "",
   };
   weatherCitiesStore.cities.push(newCity);
   router.push(`/city/${newCity.id}`);
 };
-
 </script>
 
 <template>
@@ -130,13 +138,8 @@ const addCityCard = () => {
       variant="primary"
       text="Додати місто"
     />
-    <BaseSection
-      align="column"
-      v-if="
-        !weatherCitiesStore.isListLoading 
-      "
-    >
-     <SubMainNavigation/>
+    <BaseSection align="column" v-if="!weatherCitiesStore.isListLoading">
+      <SubMainNavigation />
       <router-view></router-view>
     </BaseSection>
     <BaseSpinner v-else />
@@ -160,8 +163,6 @@ const addCityCard = () => {
   display: inline-block;
   width: 100%;
 }
-
-
 
 .item {
   padding: 4px 6px;

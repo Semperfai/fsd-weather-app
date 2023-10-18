@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { computed } from "vue";
+import { useRoute } from "vue-router";
 import { useWeatherStoreForCities } from "@/stores/weather-cities/weather-cities.store";
 
 const route = useRoute();
 const weatherCitiesStore = useWeatherStoreForCities();
 
-const isFavoritesRoute = computed(() => route.path.startsWith('/favorites'));
-
+const isFavoritesRoute = computed(() => route.path.startsWith("/favorites"));
 
 const displayedCities = computed(() => {
-  return isFavoritesRoute.value ? weatherCitiesStore.favoriteCities : weatherCitiesStore.cities;
+  return isFavoritesRoute.value
+    ? weatherCitiesStore.favoriteCities
+    : weatherCitiesStore.cities;
 });
 
 const isActiveCity = (cityId: number) => {
@@ -21,13 +22,16 @@ const isActiveCity = (cityId: number) => {
 <template>
   <ul class="city-list">
     <li
-      v-for="city,index in displayedCities"
+      v-for="(city, index) in displayedCities"
       :key="city.id"
       :class="{ 'active-city': isActiveCity(city.id) }"
     >
-    <router-link class="city-link" :to="`${isFavoritesRoute ? '/favorites/' : '/'}city/${city.id}`">
-  {{ index + 1 }}
-</router-link>
+      <router-link
+        class="city-link"
+        :to="`${isFavoritesRoute ? '/favorites/' : '/'}city/${city.id}`"
+      >
+        {{ index + 1 }}
+      </router-link>
     </li>
   </ul>
 </template>

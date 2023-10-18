@@ -103,7 +103,7 @@ export const useWeatherStoreForCities = defineStore("weatherStoreForCities", {
           units: "metric",
         });
         const existingCity = this.cities.find(
-          (c) => c.id === responseWeather?.id
+          (c) => c.id === responseWeather?.id,
         );
         if (existingCity) {
           return "Місто вже додано!";
