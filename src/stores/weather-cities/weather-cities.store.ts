@@ -91,45 +91,5 @@ export const useWeatherStoreForCities = defineStore("weatherStoreForCities", {
         this.isListLoading = false;
       }
     },
-    async addCity(city: string) {
-      this.isListLoading = true;
-      try {
-        const responseWeather = await this.getWeatherByCityAsync({
-          q: city,
-          units: "metric",
-        });
-        const responseForecast = await this.getForecastByCityAsync({
-          q: city,
-          units: "metric",
-        });
-        const existingCity = this.cities.find(
-          (c) => c.id === responseWeather?.id,
-        );
-        if (existingCity) {
-          return "Місто вже додано!";
-        }
-
-        if (responseWeather && responseForecast) {
-          if (this.cities.length < 5) {
-            this.cities.push({
-              id: responseWeather.id,
-              name: responseWeather.name,
-              currentWeatherData: mapWeatherData(responseWeather),
-              forecastWeatherData: mapForecastData(responseForecast),
-              chartData: mapChartData(responseForecast),
-            });
-            return "Місто успішно додано";
-          } else {
-            return "Для додавання видаліть місто... тому що максимум 5";
-          }
-        }
-
-        return "Помилка при додаванні міста";
-      } catch (err) {
-        console.log(err);
-      } finally {
-        this.isListLoading = false;
-      }
-    },
   },
 });

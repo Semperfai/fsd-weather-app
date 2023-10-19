@@ -20,6 +20,8 @@ The OpenWeatherMap API key is used for retrieving weather information. To use th
 
    ```plaintext
    VITE_API_KEY=YOUR_OPENWEATHERMAP_API_KEY
+   VITE_API_URL=https://api.openweathermap.org/data/2.5
+   ```
 
 ## Mapbox API Key (VITE_API_MAP_KEY)
 
@@ -35,8 +37,8 @@ The Mapbox API key is used for geocoding and map display. To use this key, follo
 
    ```plaintext
    VITE_API_MAP_KEY=YOUR_MAPBOX_API_KEY
-
-
+   VITE_API_MAP_URL=https://api.mapbox.com/geocoding/v5
+   ```
 
 ## Recommended IDE Setup
 
@@ -49,8 +51,8 @@ TypeScript cannot handle type information for `.vue` imports by default, so we r
 If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
 
 1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
+   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
+   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
 2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
 
 ## Customize configuration
